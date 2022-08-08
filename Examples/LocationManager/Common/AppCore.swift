@@ -99,7 +99,7 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, ac
 
   case .currentLocationButtonTapped:
     guard environment.locationManager.locationServicesEnabled() else {
-      state.alert = .init(title: "Location services are turned off.")
+      state.alert = .init(title: TextState("Location services are turned off."))
       return .none
     }
 
@@ -108,25 +108,25 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, ac
       state.isRequestingCurrentLocation = true
       #if os(macOS)
         return environment.locationManager
-          .requestAlwaysAuthorization(id: LocationManagerId())
+          .requestAlwaysAuthorization()
           .fireAndForget()
       #else
         return environment.locationManager
-          .requestWhenInUseAuthorization(id: LocationManagerId())
+          .requestWhenInUseAuthorization()
           .fireAndForget()
       #endif
 
     case .restricted:
-      state.alert = .init(title: "Please give us access to your location in settings.")
+      state.alert = .init(title: TextState("Please give us access to your location in settings."))
       return .none
 
     case .denied:
-      state.alert = .init(title: "Please give us access to your location in settings.")
+      state.alert = .init(title: TextState("Please give us access to your location in settings."))
       return .none
 
     case .authorizedAlways, .authorizedWhenInUse:
       return environment.locationManager
-        .requestLocation(id: LocationManagerId())
+        .requestLocation()
         .fireAndForget()
 
     @unknown default:
@@ -148,19 +148,19 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment> { state, ac
     return .none
 
   case .localSearchResponse(.failure):
-    state.alert = .init(title: "Could not perform search. Please try again.")
+    state.alert = .init(title: TextState("Could not perform search. Please try again."))
     return .none
 
   case .locationManager:
     return .none
 
   case .onAppear:
-    return environment.locationManager.create(id: LocationManagerId())
+    return environment.locationManager.delegate()
       .map(AppAction.locationManager)
+      .cancellable(id: LocationManagerId())
 
   case .onDisappear:
-    return environment.locationManager.destroy(id: LocationManagerId())
-      .fireAndForget()
+    return .cancel(id: LocationManagerId())
 
   case let .updateRegion(region):
     state.region = region
@@ -196,7 +196,7 @@ private let locationManagerReducer = Reducer<AppState, LocationManager.Action, A
     .didChangeAuthorization(.authorizedWhenInUse):
     if state.isRequestingCurrentLocation {
       return environment.locationManager
-        .requestLocation(id: LocationManagerId())
+        .requestLocation()
         .fireAndForget()
     }
     return .none
@@ -204,7 +204,7 @@ private let locationManagerReducer = Reducer<AppState, LocationManager.Action, A
   case .didChangeAuthorization(.denied):
     if state.isRequestingCurrentLocation {
       state.alert = .init(
-        title: "Location makes this app better. Please consider giving us access."
+        title: TextState("Location makes this app better. Please consider giving us access.")
       )
       state.isRequestingCurrentLocation = false
     }

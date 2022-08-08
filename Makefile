@@ -18,10 +18,12 @@ test:
 	xcodebuild \
 		-scheme ComposableCoreLocation_watchOS \
 		-destination platform="$(PLATFORM_WATCHOS)"
-	xcodebuild test \
+	cd Examples/LocationManager \
+		&& xcodebuild test \
 		-scheme LocationManagerDesktop \
 		-destination platform="$(PLATFORM_MACOS)"
-	xcodebuild test \
+	cd Examples/LocationManager \
+		&& xcodebuild test \
 		-scheme LocationManagerMobile \
 		-destination platform="$(PLATFORM_IOS)"
 
@@ -29,4 +31,4 @@ format:
 	swift format --in-place --recursive \
 		./Examples ./Package.swift ./Sources ./Tests
 
-.PHONY: format test-all test-swift test-workspace
+.PHONY: format test
