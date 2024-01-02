@@ -46,10 +46,8 @@ extension LocationManager {
       XCTFail("A failing endpoint was accessed: 'LocationManager.authorizationStatus'")
       return .notDetermined
     },
-    delegate: { .failing("LocationManager.delegate") },
-    dismissHeadingCalibrationDisplay: {
-      .failing("LocationManager.dismissHeadingCalibrationDisplay")
-    },
+    delegate: { AsyncStream { _ in } },
+    dismissHeadingCalibrationDisplay: { },
     heading: {
       XCTFail("A failing endpoint was accessed: 'LocationManager.heading'")
       return nil
@@ -78,32 +76,24 @@ extension LocationManager {
       XCTFail("A failing endpoint was accessed: 'LocationManager.monitoredRegions'")
       return []
     },
-    requestAlwaysAuthorization: { .failing("LocationManager.requestAlwaysAuthorization") },
-    requestLocation: { .failing("LocationManager.requestLocation") },
-    requestWhenInUseAuthorization: {
-      .failing("LocationManager.requestWhenInUseAuthorization")
-    },
-    requestTemporaryFullAccuracyAuthorization: { _ in
-      .failing("LocationManager.requestTemporaryFullAccuracyAuthorization")
-    },
-    set: { _ in .failing("LocationManager.set") },
+    requestAlwaysAuthorization: { },
+    requestLocation: {  },
+    requestWhenInUseAuthorization: { },
+    requestTemporaryFullAccuracyAuthorization: { _ in },
+    set: { _ in },
     significantLocationChangeMonitoringAvailable: {
       XCTFail()
       return false
     },
-    startMonitoringForRegion: { _ in .failing("LocationManager.startMonitoringForRegion") },
-    startMonitoringSignificantLocationChanges: {
-      .failing("LocationManager.startMonitoringSignificantLocationChanges")
-    },
-    startMonitoringVisits: { .failing("LocationManager.startMonitoringVisits") },
-    startUpdatingHeading: { .failing("LocationManager.startUpdatingHeading") },
-    startUpdatingLocation: { .failing("LocationManager.startUpdatingLocation") },
-    stopMonitoringForRegion: { _ in .failing("LocationManager.stopMonitoringForRegion") },
-    stopMonitoringSignificantLocationChanges: {
-      .failing("LocationManager.stopMonitoringSignificantLocationChanges")
-    },
-    stopMonitoringVisits: { .failing("LocationManager.stopMonitoringVisits") },
-    stopUpdatingHeading: { .failing("LocationManager.stopUpdatingHeading") },
-    stopUpdatingLocation: { .failing("LocationManager.stopUpdatingLocation") }
+    startMonitoringForRegion: { _ in },
+    startMonitoringSignificantLocationChanges: { },
+    startMonitoringVisits: { },
+    startUpdatingHeading: { },
+    startUpdatingLocation: { },
+    stopMonitoringForRegion: { _ in },
+    stopMonitoringSignificantLocationChanges: { },
+    stopMonitoringVisits: { },
+    stopUpdatingHeading: { },
+    stopUpdatingLocation: { }
   )
 }
