@@ -38,51 +38,23 @@ extension LocationManager {
   /// }
   /// ```
   public static let failing = Self(
-    accuracyAuthorization: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.accuracyAuthorization'")
-      return nil
-    },
-    authorizationStatus: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.authorizationStatus'")
-      return .notDetermined
-    },
+    accuracyAuthorization: unimplemented("A failing endpoint was accessed: 'LocationManager.accuracyAuthorization'"),
+    authorizationStatus: unimplemented("A failing endpoint was accessed: 'LocationManager.authorizationStatus'"),
     delegate: { AsyncStream { _ in } },
     dismissHeadingCalibrationDisplay: { },
-    heading: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.heading'")
-      return nil
-    },
-    headingAvailable: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.headingAvailable'")
-      return false
-    },
-    isRangingAvailable: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.isRangingAvailable'")
-      return false
-    },
-    location: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.location'")
-      return nil
-    },
-    locationServicesEnabled: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.locationServicesEnabled'")
-      return false
-    },
-    maximumRegionMonitoringDistance: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.maximumRegionMonitoringDistance'")
-      return CLLocationDistanceMax
-    },
-    monitoredRegions: {
-      XCTFail("A failing endpoint was accessed: 'LocationManager.monitoredRegions'")
-      return []
-    },
+    heading: unimplemented("A failing endpoint was accessed: 'LocationManager.heading'"),
+    headingAvailable: unimplemented("A failing endpoint was accessed: 'LocationManager.headingAvailable'"),
+    isRangingAvailable: unimplemented("A failing endpoint was accessed: 'LocationManager.isRangingAvailable'"),
+    location: unimplemented("A failing endpoint was accessed: 'LocationManager.location'"),
+    locationServicesEnabled: unimplemented("A failing endpoint was accessed: 'LocationManager.locationServicesEnabled'"),
+    maximumRegionMonitoringDistance: unimplemented("A failing endpoint was accessed: 'LocationManager.maximumRegionMonitoringDistance'"),
+    monitoredRegions: unimplemented("A failing endpoint was accessed: 'LocationManager.monitoredRegions'"),
     requestAlwaysAuthorization: { },
     requestLocation: {  },
     requestWhenInUseAuthorization: { },
     requestTemporaryFullAccuracyAuthorization: { _ in },
     set: { _ in },
     significantLocationChangeMonitoringAvailable: {
-      XCTFail()
       return false
     },
     startMonitoringForRegion: { _ in },

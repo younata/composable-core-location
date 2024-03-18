@@ -319,7 +319,6 @@ public struct LocationManager {
     showsBackgroundLocationIndicator: Bool? = nil
   ) async -> Void {
 #if os(macOS) || os(tvOS) || os(watchOS)
-    return .none
 #else
     return await self.set(
       Properties(
