@@ -21,6 +21,9 @@ let package = Package(
       url: "https://github.com/pointfreeco/swift-composable-architecture",
       .upToNextMajor(from: "1.9.2")),
     .package(
+      url: "https://github.com/pointfreeco/swift-concurrency-extras",
+      .upToNextMajor(from: "1.1.0")),
+    .package(
       url: "https://github.com/pointfreeco/xctest-dynamic-overlay",
       .upToNextMajor(from: "1.0.2")),
   ],
@@ -29,7 +32,8 @@ let package = Package(
       name: "ComposableCoreLocation",
       dependencies: [
         .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay")
+        .product(name: "ConcurrencyExtras", package: "swift-concurrency-extras"),
+        .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
       ]
     ),
     .testTarget(
